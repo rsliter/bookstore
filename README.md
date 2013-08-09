@@ -1,4 +1,4 @@
 bookstore
 =========
 
-Bookstore kata from here: http://codingdojo.org/cgi-bin/wiki.pl?KataPotter
+Bookstore kata from this URL: http://codingdojo.org/cgi-bin/wiki.pl?KataPotter

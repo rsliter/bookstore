@@ -11,7 +11,7 @@ class PriceManager
 
     def calculate
         full_price = COST_OF_BOOK * @books_length
-        if is_eligible_for_discount
+        if can_discount_set?
             full_price * calculate_discount_factor
         else
             full_price
@@ -20,19 +20,19 @@ class PriceManager
 
     private
     def calculate_discount_factor
-        if is_eligible_for_first_type_of_discount
+        if less_than_four_books_in_set?
             1 - DISCOUNT_PER_BOOK * (@books_length - 1)
         else
             1 - DISCOUNT_PER_BOOK * (@books_length)
-        end    
+        end
     end
 
-    def is_eligible_for_discount
+    def can_discount_set?
         unique_books = @books.uniq
         unique_books.length == @books_length
     end
 
-    def is_eligible_for_first_type_of_discount
+    def less_than_four_books_in_set?
         @books_length <= AMOUNT_OF_BOOKS_FOR_FIRST_DISCOUNT
     end
 

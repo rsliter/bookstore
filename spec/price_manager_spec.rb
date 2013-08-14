@@ -1,4 +1,4 @@
-require_relative "../price_manager"
+require "price_manager"
 
 describe PriceManager do
   

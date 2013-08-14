@@ -14,6 +14,7 @@ describe PriceManager do
         end
 
         describe "with multiple books belonging to a unique book set" do
+          
             it "should apply a 5% discount when 2 different books" do # both books are part of a default set
                 price_manager = PriceManager.new([[1,2]])
                 price_manager.calculate.should == 15.20
@@ -30,6 +31,7 @@ describe PriceManager do
                 price_manager = PriceManager.new([[1,2,3,4,5]])
                 price_manager.calculate.should == 30
             end
+            
         end
 
         describe "with multiple books belonging to different book sets" do
@@ -51,7 +53,13 @@ describe PriceManager do
                 price_manager = PriceManager.new([[1,2,3,4],[2,3]]) # Books: [1,2,3,2,3,4]
                 price_manager.calculate.should == 25.6 + 15.2 
             end
+            it "should apply discount independently to a balanced book set" do
+                price_manager = PriceManager.new([[1,2,3,4],[1,2,3,5]]) # Books: [1,1,2,2,3,3,4,5]
+                price_manager.calculate.should == 25.6 + 25.6 
+            end
+            
         end
+        
     end
     
 end

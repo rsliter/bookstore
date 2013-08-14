@@ -27,6 +27,16 @@ describe BookSetsManager do
         result = [[1, 2, 3],[2, 3]]
         book_sets_manager.discover_book_sets.should == result
       end
+      it "should return more than 2 sets if 1 or more books are repeated more than 1 time" do
+        book_sets_manager = BookSetsManager.new([1, 2, 3, 2, 3, 1, 2, 3])
+        result = [[1, 2, 3],[2, 3, 1],[2, 3]]
+        book_sets_manager.discover_book_sets.should == result
+      end
+      it "should return a balanced set of books if possible" do
+        book_sets_manager = BookSetsManager.new([1,1,2,2,3,3,4,5])
+        result = [[1, 2, 3, 4],[1, 2, 3, 5]]
+        book_sets_manager.discover_book_sets.should == result
+      end
       
     end
     

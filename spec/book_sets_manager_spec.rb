@@ -22,7 +22,7 @@ describe BookSetsManager do
         result = [[2],[2],[2]]
         book_sets_manager.discover_book_sets.should == result
       end
-      it "should return two sets if 1 or more books are repeated 1 time" do
+      it "should return two sets if 1 or more of the given books are repeated 1 time" do
         book_sets_manager = BookSetsManager.new([1, 2, 3, 2, 3])
         result = [[1, 2, 3],[2, 3]]
         book_sets_manager.discover_book_sets.should == result

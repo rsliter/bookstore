@@ -1,16 +1,25 @@
+require "book_sets_manager"
+
 class PriceManager
 
     COST_OF_BOOK = 8
     DISCOUNT_PER_BOOK = 0.05
     AMOUNT_OF_BOOKS_FOR_FIRST_DISCOUNT = 3
 
-    def initialize book_sets
-        @book_sets = book_sets
+    def initialize books
+        @sets_manager = BookSetsManager.new(books)
     end
 
-    def calculate
+    def price
+        unbalanced_price = calculate(@sets_manager.discover_book_sets)
+        balanced_price = calculate(@sets_manager.get_balanced_sets)
+        unbalanced_price < balanced_price ? unbalanced_price : balanced_price
+    end
+
+    private
+    def calculate book_sets
         total_price = 0
-        for book_set in @book_sets
+        for book_set in book_sets
           set_price = 0
           full_price = COST_OF_BOOK * book_set.length
           if can_discount_set?(book_set)
@@ -22,8 +31,7 @@ class PriceManager
         end
         total_price
     end
-
-    private
+    
     def calculate_discount_factor(book_set)
         if less_than_four_books_in_set?(book_set)
             1 - DISCOUNT_PER_BOOK * (book_set.length - 1)

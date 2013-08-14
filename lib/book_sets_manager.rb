@@ -7,8 +7,12 @@ class BookSetsManager
   
   def discover_book_sets
     discover_set_in_books(@books)
-    balance_book_sets
+    # balance_book_sets
     @book_sets
+  end
+  
+  def get_balanced_sets
+    balance_book_sets
   end
   
   private
@@ -26,10 +30,11 @@ class BookSetsManager
   
   def balance_book_sets
     average_size = get_book_sets_average_size
-    @book_sets.each do |book_set|
-      @book_sets.each do |book_set_2|
-        if could_balance_book_sets?(book_set,book_set_2,average_size)
-          books_difference = book_set - book_set_2
+    book_sets = @book_sets  
+    book_sets.each do |book_set|
+      book_sets.each do |book_set_2|
+        books_difference = book_set - book_set_2
+        if could_balance_book_sets?(book_set,book_set_2,books_difference,average_size)
           if !books_difference.empty?
             book = books_difference.pop
             book_set_2 << book
@@ -38,6 +43,7 @@ class BookSetsManager
         end
       end
     end
+    book_sets
   end
   
   def get_book_sets_average_size
@@ -48,7 +54,9 @@ class BookSetsManager
     (average_size / @book_sets.length).round(0)
   end
   
-  def could_balance_book_sets?(book_set, book_set_2, average_size)
-    book_set != book_set_2 && book_set_2.length < average_size && book_set.length > book_set_2.length
+  def could_balance_book_sets?(book_set, book_set_2, books_difference, average_size)
+    book_set != book_set_2 &&
+    book_set_2.length < average_size &&
+    book_set.length > book_set_2.length
   end
 end

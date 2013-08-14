@@ -1,20 +1,19 @@
 class BookSetsManager
-  
+
   def initialize books
     @books = books
     @book_sets = []
   end
-  
-  def discover_book_sets
+
+  def unbalanced_sets
     discover_set_in_books(@books)
-    # balance_book_sets
     @book_sets
   end
-  
-  def get_balanced_sets
+
+  def balanced_sets
     balance_book_sets
   end
-  
+
   private
   def discover_set_in_books books
     book_set = books.uniq

@@ -11,8 +11,8 @@ class PriceManager
     end
 
     def price
-        unbalanced_price = calculate(@sets_manager.discover_book_sets)
-        balanced_price = calculate(@sets_manager.get_balanced_sets)
+        unbalanced_price = calculate(@sets_manager.unbalanced_sets)
+        balanced_price = calculate(@sets_manager.balanced_sets)
         unbalanced_price < balanced_price ? unbalanced_price : balanced_price
     end
 

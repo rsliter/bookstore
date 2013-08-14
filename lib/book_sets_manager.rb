@@ -7,6 +7,7 @@ class BookSetsManager
   
   def discover_book_sets
     discover_set_in_books(@books)
+    balance_book_sets
     @book_sets
   end
   
@@ -23,4 +24,31 @@ class BookSetsManager
     end
   end
   
+  def balance_book_sets
+    average_size = get_book_sets_average_size
+    for book_set in @book_sets
+      for book_set_2 in @book_sets
+        if can_balance_book_sets?(book_set,book_set_2,average_size)
+          books_difference = book_set - book_set_2
+          if (books_difference.length > 0)
+            book = books_difference.pop
+            book_set_2.push(book)
+            book_set.delete(book)
+          end
+        end
+      end
+    end
+  end
+  
+  def get_book_sets_average_size
+    average_size = 0
+    for book_set in @book_sets
+      average_size += book_set.length
+    end
+    (average_size / @book_sets.length).round(0)
+  end
+  
+  def can_balance_book_sets?(book_set, book_set_2, average_size)
+    book_set_2.length < average_size && book_set != book_set_2 && book_set.length > book_set_2.length
+  end
 end

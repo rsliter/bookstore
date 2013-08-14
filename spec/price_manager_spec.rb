@@ -55,7 +55,9 @@ describe PriceManager do
             end
             it "should apply discount independently to a balanced book set" do
                 price_manager = PriceManager.new([[1,2,3,4],[1,2,3,5]]) # Books: [1,1,2,2,3,3,4,5]
-                price_manager.calculate.should == 25.6 + 25.6 
+                price_manager.calculate.should == 25.6 + 25.6
+                price_manager = PriceManager.new([[0,1,2,3],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4],[0,1,3,4]]) # Books: [0*5,1*5,2*4,3*5,4*4]
+                price_manager.calculate.should == 141.2
             end
             
         end

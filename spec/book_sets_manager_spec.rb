@@ -36,6 +36,9 @@ describe BookSetsManager do
         book_sets_manager = BookSetsManager.new([1,1,2,2,3,3,4,5])
         result = [[1, 2, 3, 4],[1, 2, 3, 5]]
         book_sets_manager.discover_book_sets.should == result
+        book_sets_manager = BookSetsManager.new([0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,3,3,4,4,4,4])
+        result = [[0,1,2,3],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4],[0,1,3,4]]
+        book_sets_manager.discover_book_sets.should == result
       end
       
     end

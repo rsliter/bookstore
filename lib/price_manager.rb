@@ -18,7 +18,7 @@ class PriceManager
           else
               set_price = full_price
           end  
-          total_price = total_price + set_price 
+          total_price += set_price 
         end
         total_price
     end

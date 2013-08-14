@@ -1,4 +1,4 @@
-require_relative "../book_sets_manager"
+require "book_sets_manager"
 
 describe BookSetsManager do
 
